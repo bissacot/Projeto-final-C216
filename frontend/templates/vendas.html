@@ -1,16 +1,49 @@
-<h1>Vendas</h1>
+<!DOCTYPE html>
+<html lang="pt-br">
 
-<a href="/">Home</a> | <a href="/categorias">Categorias</a> | <a href="/produtos">Produtos</a>
+<head>
+    <meta charset="UTF-8">
+    <title>Vendas</title>
 
-<table border="1">
-    <tr>
-        <th>ID</th>
-        <th>Valor Total</th>
-    </tr>
-    {% for venda in vendas %}
-    <tr>
-        <td>{{ venda.id }}</td>
-        <td>R$ {{ venda.valor_total }}</td>
-    </tr>
-    {% endfor %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<header>
+    <h1>🍺 BarStock</h1>
+</header>
+
+<nav>
+    <a href="/">Home</a>
+    <a href="/categorias">Categorias</a>
+    <a href="/produtos">Produtos</a>
+    <a href="/vendas">Vendas</a>
+</nav>
+
+<div class="container">
+
+<h2>Vendas</h2>
+
+<table>
+
+<tr>
+    <th>ID</th>
+    <th>Valor Total</th>
+</tr>
+
+{% for venda in vendas %}
+
+<tr>
+    <td>{{ venda.id }}</td>
+    <td>R$ {{ venda.valor_total }}</td>
+</tr>
+
+{% endfor %}
+
 </table>
+
+</div>
+
+</body>
+</html>

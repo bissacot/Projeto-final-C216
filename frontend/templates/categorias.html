@@ -1,16 +1,49 @@
-<h1>Categorias</h1>
+<!DOCTYPE html>
+<html lang="pt-br">
 
-<a href="/">Home</a> | <a href="/produtos">Produtos</a> | <a href="/vendas">Vendas</a>
+<head>
+    <meta charset="UTF-8">
+    <title>Categorias</title>
 
-<table border="1">
-    <tr>
-        <th>ID</th>
-        <th>Nome</th>
-    </tr>
-    {% for categoria in categorias %}
-    <tr>
-        <td>{{ categoria.id }}</td>
-        <td>{{ categoria.nome }}</td>
-    </tr>
-    {% endfor %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<header>
+    <h1>🍺 BarStock</h1>
+</header>
+
+<nav>
+    <a href="/">Home</a>
+    <a href="/categorias">Categorias</a>
+    <a href="/produtos">Produtos</a>
+    <a href="/vendas">Vendas</a>
+</nav>
+
+<div class="container">
+
+<h2>Categorias</h2>
+
+<table>
+
+<tr>
+    <th>ID</th>
+    <th>Nome</th>
+</tr>
+
+{% for categoria in categorias %}
+
+<tr>
+    <td>{{ categoria.id }}</td>
+    <td>{{ categoria.nome }}</td>
+</tr>
+
+{% endfor %}
+
 </table>
+
+</div>
+
+</body>
+</html>

@@ -1,15 +1,52 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <title>BarStock</title>
-</head>
-<body>
-    <h1>BarStock</h1>
-    <p>Sistema de gerenciamento de estoque de bar</p>
 
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<header>
+    <h1>🍺 BarStock</h1>
+    <p>Sistema de Gerenciamento de Estoque de Bar</p>
+</header>
+
+<nav>
+    <a href="/">Home</a>
     <a href="/categorias">Categorias</a>
     <a href="/produtos">Produtos</a>
     <a href="/vendas">Vendas</a>
+</nav>
+
+<div class="container">
+
+    <div class="card">
+        <h2>Bem-vindo!</h2>
+
+        <p>
+            Este sistema foi desenvolvido para a disciplina C216 utilizando:
+        </p>
+
+        <ul>
+            <li>FastAPI</li>
+            <li>Flask</li>
+            <li>PostgreSQL</li>
+            <li>Docker</li>
+            <li>SQLAlchemy</li>
+        </ul>
+
+        <p>
+            Utilize o menu acima para navegar entre Categorias,
+            Produtos e Vendas.
+        </p>
+
+    </div>
+
+</div>
+
 </body>
 </html>
