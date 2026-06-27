@@ -1,0 +1,25 @@
+services:
+  db:
+    image: postgres:16
+    container_name: barstock_postgres
+    environment:
+      POSTGRES_DB: barstock_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5433:5432"
+    volumes:
+      - barstock_data:/var/lib/postgresql/data
+
+  backend:
+    build: ./backend
+    container_name: barstock_backend
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/barstock_db
+
+volumes:
+  barstock_data:
