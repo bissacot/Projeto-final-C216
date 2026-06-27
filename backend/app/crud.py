@@ -1,3 +1,7 @@
+from sqlalchemy.orm import Session
+
+from app import models, schemas
+
 def criar_produto(db: Session, produto: schemas.ProdutoCreate):
     novo_produto = models.Produto(
         nome=produto.nome,
@@ -44,3 +48,58 @@ def deletar_produto(db: Session, produto_id: int):
         db.commit()
 
     return produto
+
+def criar_venda(db: Session, venda: schemas.VendaCreate):
+    nova_venda = models.Venda(valor_total=0)
+    db.add(nova_venda)
+    db.commit()
+    db.refresh(nova_venda)
+
+    valor_total = 0
+
+    for item in venda.itens:
+        produto = buscar_produto(db, item.produto_id)
+
+        if not produto:
+            raise ValueError(f"Produto {item.produto_id} não encontrado")
+
+        if produto.estoque < item.quantidade:
+            raise ValueError(f"Estoque insuficiente para {produto.nome}")
+
+        produto.estoque -= item.quantidade
+
+        item_venda = models.ItemVenda(
+            venda_id=nova_venda.id,
+            produto_id=produto.id,
+            quantidade=item.quantidade,
+            preco_unitario=produto.preco
+        )
+
+        valor_total += produto.preco * item.quantidade
+
+        db.add(item_venda)
+
+    nova_venda.valor_total = valor_total
+
+    db.commit()
+    db.refresh(nova_venda)
+
+    return nova_venda
+
+
+def listar_vendas(db: Session):
+    return db.query(models.Venda).all()
+
+
+def buscar_venda(db: Session, venda_id: int):
+    return db.query(models.Venda).filter(models.Venda.id == venda_id).first()
+
+
+def deletar_venda(db: Session, venda_id: int):
+    venda = buscar_venda(db, venda_id)
+
+    if venda:
+        db.delete(venda)
+        db.commit()
+
+    return venda    
