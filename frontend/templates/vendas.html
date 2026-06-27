@@ -1,0 +1,16 @@
+<h1>Vendas</h1>
+
+<a href="/">Home</a> | <a href="/categorias">Categorias</a> | <a href="/produtos">Produtos</a>
+
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Valor Total</th>
+    </tr>
+    {% for venda in vendas %}
+    <tr>
+        <td>{{ venda.id }}</td>
+        <td>R$ {{ venda.valor_total }}</td>
+    </tr>
+    {% endfor %}
+</table>

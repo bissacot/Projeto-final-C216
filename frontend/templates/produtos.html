@@ -1,0 +1,22 @@
+<h1>Produtos</h1>
+
+<a href="/">Home</a> | <a href="/categorias">Categorias</a> | <a href="/vendas">Vendas</a>
+
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Preço</th>
+        <th>Estoque</th>
+        <th>Categoria</th>
+    </tr>
+    {% for produto in produtos %}
+    <tr>
+        <td>{{ produto.id }}</td>
+        <td>{{ produto.nome }}</td>
+        <td>R$ {{ produto.preco }}</td>
+        <td>{{ produto.estoque }}</td>
+        <td>{{ produto.categoria_id }}</td>
+    </tr>
+    {% endfor %}
+</table>

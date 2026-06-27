@@ -15,11 +15,19 @@ services:
     build: ./backend
     container_name: barstock_backend
     ports:
-      - "8001:8000"
+      - "8000:8000"
     depends_on:
       - db
     environment:
       DATABASE_URL: postgresql://postgres:postgres@db:5432/barstock_db
+
+  frontend:
+    build: ./frontend
+    container_name: barstock_frontend
+    ports:
+      - "5000:5000"
+    depends_on:
+      - backend
 
 volumes:
   barstock_data:
